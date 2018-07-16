@@ -1,0 +1,10 @@
+D:\Work\Epam\C#\Base\EpamTask1\TestsEpamTask1\bin\Debug\TestsEpamTask1.exe.config
+D:\Work\Epam\C#\Base\EpamTask1\TestsEpamTask1\bin\Debug\TestsEpamTask1.exe
+D:\Work\Epam\C#\Base\EpamTask1\TestsEpamTask1\bin\Debug\TestsEpamTask1.pdb
+D:\Work\Epam\C#\Base\EpamTask1\TestsEpamTask1\bin\Debug\EpamTask1.dll
+D:\Work\Epam\C#\Base\EpamTask1\TestsEpamTask1\bin\Debug\EpamTask1.pdb
+D:\Work\Epam\C#\Base\EpamTask1\TestsEpamTask1\obj\Debug\TestsEpamTask1.csprojAssemblyReference.cache
+D:\Work\Epam\C#\Base\EpamTask1\TestsEpamTask1\obj\Debug\TestsEpamTask1.csproj.CoreCompileInputs.cache
+D:\Work\Epam\C#\Base\EpamTask1\TestsEpamTask1\obj\Debug\TestsEpamTask1.csproj.CopyComplete
+D:\Work\Epam\C#\Base\EpamTask1\TestsEpamTask1\obj\Debug\TestsEpamTask1.exe
+D:\Work\Epam\C#\Base\EpamTask1\TestsEpamTask1\obj\Debug\TestsEpamTask1.pdb
