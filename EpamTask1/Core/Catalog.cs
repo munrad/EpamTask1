@@ -59,7 +59,7 @@ namespace EpamTask1.Core
             return result;
         }
 
-        public ICatalogObject[] SortByYear(bool isReverse)
+        public ICatalogObject[] SortByYear(bool isReverse = false)
         {
             Array.Sort(catalogObjects, new Comparers.SortByYear{ IsReverse = isReverse });
             return catalogObjects;
@@ -69,38 +69,67 @@ namespace EpamTask1.Core
         {
             var count = 0;
             var arrResult = new IBook[count];
-            Array.ForEach(catalogObjects, m =>
+            foreach (var m in catalogObjects)
             {              
-                if (!(m is IBook book)) return;
+                if (!(m is IBook book)) break;
                 var arrAuthors = book.Authors;             
-                if (arrAuthors == null) return;
+                if (arrAuthors == null) break;
                 foreach (var t in arrAuthors)
                 {
-                    if (t.Contains(name))
-                    {
-                        Array.Resize(ref arrResult, ++count);
-                        arrResult[count - 1] = book;
-                        break;
-                    }
+                    if (!t.Contains(name)) continue;
+                    Array.Resize(ref arrResult, ++count);
+                    arrResult[count - 1] = book;
+                    break;
                 }
-            });
+            }
             return arrResult;
         }
 
         public IBook[][] GetSortBooks(string symb)
         {
             var count = 0;
+            var countArr = 0;
             var arrResult = new IBook[count];
-            var books = new IBook[count][];
-            Array.ForEach(catalogObjects, m =>
+            var books = new IBook[0][];
+            foreach (var m in catalogObjects)
             {
-                if (!(m is IBook book)) return;
-                if (book.PubName.Contains(symb))
-                {
-
-                }
-            });
+                if (!(m is IBook book)) continue;
+                if (book.PubName == null) continue;
+                if (!book.PubName.Contains(symb)) continue;
+                Array.Resize(ref arrResult, ++count);
+                arrResult[count - 1] = book;
+            }
+            Array.Sort(arrResult, new Comparers.SortByPubName());
+            for (var i = 0; i < arrResult.Length;)
+            {
+                var res = Array.FindAll(arrResult, n => n.PubName == arrResult[i].PubName);
+                var index = Array.FindLastIndex(arrResult, t => t.PubName == arrResult[i].PubName);
+                Array.Reverse(arrResult);
+                Array.Resize(ref arrResult, arrResult.Length - (index + 1));
+                Array.Reverse(arrResult);
+                Array.Resize(ref books, ++countArr);
+                books[countArr - 1] = res;
+            }
             return books;
+        }
+
+        public ICatalogObject[][] GroupByYear()
+        {
+            var countArr = 0;
+            var objects = new ICatalogObject[countArr][];
+            var arrResult = SortByYear();
+            for (var i = 0; i < arrResult.Length;)
+            {
+                if (arrResult[i] is IPatent) continue;
+                var res = Array.FindAll(arrResult, n => n.PubYear == arrResult[i].PubYear);
+                var index = Array.FindLastIndex(arrResult, t => t.PubYear == arrResult[i].PubYear);
+                Array.Reverse(arrResult);
+                Array.Resize(ref arrResult, arrResult.Length - (index + 1));
+                Array.Reverse(arrResult);
+                Array.Resize(ref objects, ++countArr);
+                objects[countArr - 1] = res;
+            }
+            return objects;
         }
     }
 }

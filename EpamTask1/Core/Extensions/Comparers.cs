@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EpamTask1.Core.Interfaces;
 using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core.Extensions
@@ -37,6 +38,14 @@ namespace EpamTask1.Core.Extensions
                     else
                         return 0;
                 }
+            }
+        }
+
+        public class SortByPubName : IComparer<IBook>
+        {
+            public int Compare(IBook x, IBook y)
+            {
+                return string.CompareOrdinal(x?.PubName, y?.PubName);
             }
         }
     }

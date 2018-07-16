@@ -14,5 +14,7 @@ namespace EpamTask1.Core.Interfaces.Catalog
         ICatalogObject[] SearchByName(string name);
         ICatalogObject[] SortByYear(bool isReverse);
         IBook[] SearchBooksByAuthors(string name);
+        IBook[][] GetSortBooks(string symb);
+        ICatalogObject[][] GroupByYear();
     }
 }

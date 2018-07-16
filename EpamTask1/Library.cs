@@ -48,5 +48,15 @@ namespace EpamTask1
         {
             return catalog.SearchBooksByAuthors(name);
         }
+
+        public IBook[][] GetSortBooks(string symb)
+        {
+            return catalog.GetSortBooks(symb);
+        }
+
+        public ICatalogObject[][] GroupByYear()
+        {
+            return catalog.GroupByYear();
+        }
     }
 }
