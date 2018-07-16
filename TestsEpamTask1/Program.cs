@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using EpamTask1;
 using EpamTask1.Core.Classes;
 using EpamTask1.Core.Interfaces;
+using NUnit.Framework;
 
 
 namespace TestsEpamTask1
 {
+
     class Program
     {
+        [Test]
         static void Main(string[] args)
         {
             var lib = new Library();
