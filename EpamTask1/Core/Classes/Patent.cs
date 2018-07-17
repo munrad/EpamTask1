@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using EpamTask1.Core.Interfaces;
 
 namespace EpamTask1.Core.Classes
 {
+    [Serializable]
     public class Patent : IPatent
     {
         public int RegNumber { get; set; }
         public string Country { get; set; }
-        public string[] Inventors { get; set; }
+        public List<string> Inventors { get; set; }
         public DateTime AppDate { get; set; }
         public DateTime PubDate { get; set; }
         public string Name { get; set; }

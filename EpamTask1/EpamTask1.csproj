@@ -46,6 +46,7 @@
     <Compile Include="Core\Classes\Book.cs" />
     <Compile Include="Core\Classes\Paper.cs" />
     <Compile Include="Core\Classes\Patent.cs" />
+    <Compile Include="Core\Extensions\BinarySerialization.cs" />
     <Compile Include="Core\Extensions\Comparers.cs" />
     <Compile Include="Core\Interfaces\Catalog\ICatalog.cs" />
     <Compile Include="Core\Interfaces\IBook.cs" />

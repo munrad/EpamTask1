@@ -1,28 +1,28 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using EpamTask1.Core.Extensions;
 using EpamTask1.Core.Interfaces;
 using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core
 {
-    sealed class Catalog : ICatalog
+    [Serializable]
+    internal sealed class Catalog : ICatalog
     {
-        private ICatalogObject[] catalogObjects = new ICatalogObject[0];
+        private readonly List<ICatalogObject> catalogObjects = new List<ICatalogObject>();
 
         public int PubYear { get; set; }
 
         public void Add(ICatalogObject obj)
         {
-            var arr = new ICatalogObject[catalogObjects.Length + 1];
-            catalogObjects.CopyTo(arr, 0);
-            arr[catalogObjects.Length] = obj;
-            catalogObjects = arr;
+            catalogObjects.Add(obj);
         }
 
         public void Remove(ICatalogObject obj)
         {
-            var arr = Array.FindAll(catalogObjects, m => !m.Equals(obj));
-            catalogObjects = arr;
+            catalogObjects.RemoveAll(m => m.Equals(obj));
         }
 
         public ICatalog GetAllObjects()
@@ -30,41 +30,36 @@ namespace EpamTask1.Core
             return this;
         }
 
-        public ICatalogObject[] SearchByName(string name)
+        public IList<ICatalogObject> SearchByName(string name)
         {
-            var count = 0;
-            var result = new ICatalogObject[count];
+            var result = new List<ICatalogObject>();
 
             foreach (var t in catalogObjects)
             {
                 if (!(t is IBook book)) continue;
                 if (book.Name != name) continue;
-                Array.Resize(ref result, ++count);
-                result[count - 1] = t;
+                result.Add(t);
 
                 if (!(t is IPaper paper)) continue;
                 if (paper.Name != name) continue;
-                Array.Resize(ref result, ++count);
-                result[count - 1] = t;
+                result.Add(t);
 
                 if (!(t is IPatent patent)) continue;
                 if (patent.Name != name) continue;
-                Array.Resize(ref result, ++count);
-                result[count - 1] = t;
+                result.Add(t);
             }
             return result;
         }
 
-        public ICatalogObject[] SortByYear(bool isReverse = false)
+        public IList<ICatalogObject> SortByYear(bool isReverse = false)
         {
-            Array.Sort(catalogObjects, new Comparers.SortByYear{ IsReverse = isReverse });
+            catalogObjects.Sort(new Comparers.SortByYear { IsReverse = isReverse });
             return catalogObjects;
         }
 
-        public IBook[] SearchBooksByAuthors(string name)
+        public IList<IBook> SearchBooksByAuthors(string name)
         {
-            var count = 0;
-            var arrResult = new IBook[count];
+            var arrResult = new List<IBook>();
             foreach (var m in catalogObjects)
             {              
                 if (!(m is IBook book)) break;
@@ -73,57 +68,47 @@ namespace EpamTask1.Core
                 foreach (var t in arrAuthors)
                 {
                     if (!t.Contains(name)) continue;
-                    Array.Resize(ref arrResult, ++count);
-                    arrResult[count - 1] = book;
+                    arrResult.Add(book);
                     break;
                 }
             }
             return arrResult;
         }
 
-        public IBook[][] GetSortBooks(string symb)
+        public IDictionary<string, IList<IBook>> GetSortBooks(string symb)
         {
-            var count = 0;
-            var countArr = 0;
-            var arrResult = new IBook[count];
-            var books = new IBook[0][];
+            var arr = new List<IBook>();
+            var books = new Dictionary<string, IList<IBook>>();
             foreach (var m in catalogObjects)
             {
                 if (!(m is IBook book)) continue;
                 if (book.PubName == null) continue;
                 if (!book.PubName.Contains(symb)) continue;
-                Array.Resize(ref arrResult, ++count);
-                arrResult[count - 1] = book;
+                arr.Add(book);
             }
-            Array.Sort(arrResult, new Comparers.SortByPubName());
-            for (var i = 0; i < arrResult.Length;)
+            foreach (var book in arr)
             {
-                var res = Array.FindAll(arrResult, n => n.PubName == arrResult[i].PubName);
-                var index = Array.FindLastIndex(arrResult, t => t.PubName == arrResult[i].PubName);
-                Array.Reverse(arrResult);
-                Array.Resize(ref arrResult, arrResult.Length - (index + 1));
-                Array.Reverse(arrResult);
-                Array.Resize(ref books, ++countArr);
-                books[countArr - 1] = res;
+                if (book.PubName == null) continue;
+                if (!books.ContainsKey(book.PubName))
+                    books.Add(book.PubName, arr.FindAll(n => n.PubName.Equals(book.PubName)));
             }
             return books;
         }
 
-        public ICatalogObject[][] GroupByYear()
+        public IDictionary<int, IList<ICatalogObject>> GroupByYear()
         {
-            var countArr = 0;
-            var objects = new ICatalogObject[countArr][];
-            var arrResult = SortByYear();
-            for (var i = 0; i < arrResult.Length;)
+            var arr = new List<ICatalogObject>();
+            var objects = new Dictionary<int, IList<ICatalogObject>>();
+            foreach (var m in catalogObjects)
             {
-                if (arrResult[i] is IPatent) continue;
-                var res = Array.FindAll(arrResult, n => n.PubYear == arrResult[i].PubYear);
-                var index = Array.FindLastIndex(arrResult, t => t.PubYear == arrResult[i].PubYear);
-                Array.Reverse(arrResult);
-                Array.Resize(ref arrResult, arrResult.Length - (index + 1));
-                Array.Reverse(arrResult);
-                Array.Resize(ref objects, ++countArr);
-                objects[countArr - 1] = res;
+                if (m is IPatent) continue;
+                arr.Add(m);
+            }
+
+            foreach (var catalogObject in arr)
+            {
+                if (!objects.ContainsKey(catalogObject.PubYear))
+                    objects.Add(catalogObject.PubYear, arr.FindAll(n => n.PubYear.Equals(catalogObject.PubYear)));
             }
             return objects;
         }

@@ -3,6 +3,7 @@ using EpamTask1.Core.Interfaces;
 
 namespace EpamTask1.Core.Classes
 {
+    [Serializable]
     public class Paper : IPaper
     {
         public int Number { get; set; }
@@ -14,6 +15,8 @@ namespace EpamTask1.Core.Classes
         public string Name { get; set; }
         public string Note { get; set; }
         public int CountPages { get; set; }
+        public int Price { get; set ; }
+        public int CountCopies { get; set; }
 
         public override bool Equals(object obj)
         {

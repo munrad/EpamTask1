@@ -33,8 +33,8 @@ namespace TestsEpamTask1
             lib.Add(new Book { PubYear = 1999 });
             var t3 = lib.SortByYear(true);
             var t4 = lib.SortByYear(false);
-            lib.Add(new Book { Authors = new [] { "Lol", "Kek"} });
-            lib.Add(new Book { Authors = new [] { "Lol", "Kek", "Cheburek" } });
+            lib.Add(new Book { Authors = new List<string> { "Lol", "Kek"} });
+            lib.Add(new Book { Authors = new List<string> { "Lol", "Kek", "Cheburek" } });
             var t5 = lib.SearchBooksByAuthors("Kek");
             lib.Add(new Book { PubName = "Kek" });
             lib.Add(new Book { PubName = "Kek 33" });
@@ -48,6 +48,7 @@ namespace TestsEpamTask1
             lib.Add(new Paper { PubYear = 1994 });
             lib.Add(new Patent { PubDate = new DateTime(1994, 01, 01) });
             var t7 = lib.GroupByYear();
+            lib.Save();
         }
     }
 }

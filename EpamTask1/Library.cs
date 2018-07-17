@@ -1,4 +1,8 @@
-﻿using EpamTask1.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using EpamTask1.Core;
+using EpamTask1.Core.Extensions;
 using EpamTask1.Core.Interfaces;
 using EpamTask1.Core.Interfaces.Catalog;
 
@@ -29,29 +33,39 @@ namespace EpamTask1
             catalog.Remove(obj);
         }
 
-        public ICatalogObject[] SearchByName(string name)
+        public IList<ICatalogObject> SearchByName(string name)
         {
             return catalog.SearchByName(name);
         }
 
-        public ICatalogObject[] SortByYear(bool isReverse)
+        public IList<ICatalogObject> SortByYear(bool isReverse)
         {
             return catalog.SortByYear(isReverse);
         }
 
-        public IBook[] SearchBooksByAuthors(string name)
+        public IList<IBook> SearchBooksByAuthors(string name)
         {
             return catalog.SearchBooksByAuthors(name);
         }
 
-        public IBook[][] GetSortBooks(string symb)
+        public IDictionary<string, IList<IBook>> GetSortBooks(string symb)
         {
             return catalog.GetSortBooks(symb);
         }
 
-        public ICatalogObject[][] GroupByYear()
+        public IDictionary<int, IList<ICatalogObject>> GroupByYear()
         {
             return catalog.GroupByYear();
+        }
+
+        public void Save()
+        {
+            //TODO 
+        }
+
+        public void Load()
+        {
+            //TODO 
         }
     }
 }

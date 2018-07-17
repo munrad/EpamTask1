@@ -1,11 +1,14 @@
-﻿using EpamTask1.Core.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using EpamTask1.Core.Interfaces;
 
 namespace EpamTask1.Core.Classes
 {
+    [Serializable]
     public class Book : IBook
     {
         public string Isbn { get; set; }
-        public string[] Authors { get; set; }
+        public List<string> Authors { get; set; }
         public string PubCity { get; set; }
         public string PubName { get; set; }
         public int PubYear { get; set; }
