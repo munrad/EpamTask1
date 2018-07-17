@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using EpamTask1.Core;
-using EpamTask1.Core.Classes;
+﻿using EpamTask1.Core;
 using EpamTask1.Core.Interfaces;
 using EpamTask1.Core.Interfaces.Catalog;
 

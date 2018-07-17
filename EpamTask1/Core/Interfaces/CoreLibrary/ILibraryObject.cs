@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EpamTask1.Core.Interfaces.Catalog;
+﻿using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core.Interfaces.CoreLibrary
 {
@@ -12,5 +7,6 @@ namespace EpamTask1.Core.Interfaces.CoreLibrary
         string Name { get; set; }       
         string Note { get; set; }
         int CountPages { get; set; }
+        int Price { get; set; }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EpamTask1.Core.Interfaces;
-using EpamTask1.Core.Interfaces.Catalog;
+﻿using EpamTask1.Core.Interfaces;
 
 namespace EpamTask1.Core.Classes
 {
@@ -18,10 +12,12 @@ namespace EpamTask1.Core.Classes
         public string Name { get; set; }
         public string Note { get; set; }
         public int CountPages { get; set; }
+        public int Price { get; set; }
+        public int CountCopies { get; set; }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
+            if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
             return obj.GetType() == typeof(Book) && Equals((Book) obj);
         }

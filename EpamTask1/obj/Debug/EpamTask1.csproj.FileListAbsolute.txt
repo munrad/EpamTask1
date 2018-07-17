@@ -2,9 +2,5 @@ D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\obj\Debug\EpamTask1.csprojAssemblyRefer
 D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\obj\Debug\EpamTask1.csproj.CoreCompileInputs.cache
 D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\bin\Debug\EpamTask1.dll
 D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\bin\Debug\EpamTask1.pdb
-D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\bin\Debug\nunit.framework.dll
-D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\bin\Debug\nunit.framework.pdb
-D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\bin\Debug\nunit.framework.xml
-D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\obj\Debug\EpamTask1.csproj.CopyComplete
 D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\obj\Debug\EpamTask1.dll
 D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\obj\Debug\EpamTask1.pdb

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EpamTask1.Core.Interfaces;
-using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core.Classes
 {
@@ -22,7 +17,7 @@ namespace EpamTask1.Core.Classes
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
+            if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
             return obj.GetType() == this.GetType() && Equals((Paper) obj);
         }
