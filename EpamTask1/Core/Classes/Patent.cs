@@ -4,7 +4,6 @@ using EpamTask1.Core.Interfaces;
 
 namespace EpamTask1.Core.Classes
 {
-    [Serializable]
     public class Patent : IPatent
     {
         public int RegNumber { get; set; }

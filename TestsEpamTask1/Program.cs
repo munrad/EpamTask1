@@ -18,7 +18,7 @@ namespace TestsEpamTask1
         static void Main(string[] args)
         {
             var lib = new Library();
-            lib.Add(new Book());
+            lib.Add(new Book() { Authors = new List<string> { "h", "u", "k" }});
             lib.Add(new Book { Isbn = "2" });
             lib.Add(new Book());
             lib.Add(new Book { Isbn = "1" });
@@ -48,7 +48,8 @@ namespace TestsEpamTask1
             lib.Add(new Paper { PubYear = 1994 });
             lib.Add(new Patent { PubDate = new DateTime(1994, 01, 01) });
             var t7 = lib.GroupByYear();
-            lib.Save();
+            lib.Save("h.txt");
+            lib.Load("h.txt");
         }
     }
 }

@@ -8,33 +8,37 @@ using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core
 {
-    [Serializable]
-    internal sealed class Catalog : ICatalog
+    sealed class Catalog : ICatalog
     {
-        private readonly List<ICatalogObject> catalogObjects = new List<ICatalogObject>();
-
+        public List<ICatalogObject> CatalogObjects;
         public int PubYear { get; set; }
 
-        public void Add(ICatalogObject obj)
+        public Catalog()
         {
-            catalogObjects.Add(obj);
+            CatalogObjects = new List<ICatalogObject>();
+        }
+
+        public void Add(ICatalogObject obj, bool isForce = false)
+        {
+            Validator.ValidateProp(obj);
+            CatalogObjects.Add(obj);
         }
 
         public void Remove(ICatalogObject obj)
         {
-            catalogObjects.RemoveAll(m => m.Equals(obj));
+            CatalogObjects.RemoveAll(m => m.Equals(obj));
         }
 
-        public ICatalog GetAllObjects()
+        public IList<ICatalogObject> GetAllObjects()
         {
-            return this;
+            return CatalogObjects;
         }
 
         public IList<ICatalogObject> SearchByName(string name)
         {
             var result = new List<ICatalogObject>();
 
-            foreach (var t in catalogObjects)
+            foreach (var t in CatalogObjects)
             {
                 if (!(t is IBook book)) continue;
                 if (book.Name != name) continue;
@@ -53,14 +57,14 @@ namespace EpamTask1.Core
 
         public IList<ICatalogObject> SortByYear(bool isReverse = false)
         {
-            catalogObjects.Sort(new Comparers.SortByYear { IsReverse = isReverse });
-            return catalogObjects;
+            CatalogObjects.Sort(new Comparers.SortByYear { IsReverse = isReverse });
+            return CatalogObjects;
         }
 
         public IList<IBook> SearchBooksByAuthors(string name)
         {
             var arrResult = new List<IBook>();
-            foreach (var m in catalogObjects)
+            foreach (var m in CatalogObjects)
             {              
                 if (!(m is IBook book)) break;
                 var arrAuthors = book.Authors;             
@@ -79,7 +83,7 @@ namespace EpamTask1.Core
         {
             var arr = new List<IBook>();
             var books = new Dictionary<string, IList<IBook>>();
-            foreach (var m in catalogObjects)
+            foreach (var m in CatalogObjects)
             {
                 if (!(m is IBook book)) continue;
                 if (book.PubName == null) continue;
@@ -99,7 +103,7 @@ namespace EpamTask1.Core
         {
             var arr = new List<ICatalogObject>();
             var objects = new Dictionary<int, IList<ICatalogObject>>();
-            foreach (var m in catalogObjects)
+            foreach (var m in CatalogObjects)
             {
                 if (m is IPatent) continue;
                 arr.Add(m);
