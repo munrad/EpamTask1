@@ -8,13 +8,16 @@ using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core
 {
-    sealed class Catalog : ICatalog
-    {
+    public sealed class Catalog
+    {       
         public List<ICatalogObject> CatalogObjects;
         public int PubYear { get; set; }
 
+        public delegate T CustomSortDel<T>(T obj);
+
         public Catalog()
         {
+            
             CatalogObjects = new List<ICatalogObject>();
         }
 
@@ -55,16 +58,24 @@ namespace EpamTask1.Core
             return result;
         }
 
-        public IList<ICatalogObject> Search(object obj, Func<List<ICatalogObject>, List<ICatalogObject>> func)
+        public IList<ICatalogObject> Sort<T>(CustomSortDel<T> func) where T : IComparable
         {
-            var result = func(CatalogObjects);
-            return result;
-        }
+            var cat = CatalogObjects as List<T>;
+            if (cat != null)
+                for (var i = 0; i < cat.Count; i++)
+                {
+                    for (var j = i; j < cat.Count; j++)
+                    {
+                        if (func(cat[j]).CompareTo(func(cat[i])) < 0)
+                        {
+                            var tmp = cat[i];
+                            cat[i] = cat[j];
+                            cat[j] = tmp;
+                        }
+                    }
+                }
 
-        public IList<ICatalogObject> Sort(Action<List<ICatalogObject>> func)
-        {
-            func.Invoke(CatalogObjects);
-            return CatalogObjects;
+            return cat as IList<ICatalogObject>;
         }
 
         public IList<ICatalogObject> SortByYear(bool isReverse = false)

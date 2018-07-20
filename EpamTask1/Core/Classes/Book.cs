@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using EpamTask1.Core.Attributes;
 using EpamTask1.Core.Interfaces;
 
@@ -56,6 +57,57 @@ namespace EpamTask1.Core.Classes
                 hashCode = (hashCode * 397) ^ CountPages;
                 return hashCode;
             }
+        }
+
+        public int CompareTo(object obj)
+        {
+            var newObj = obj as Book;
+            if (ReferenceEquals(this, newObj))
+                return 0;
+            else if (newObj == null)
+                return 1;
+
+            var cmp = string.Compare(Isbn, newObj.Isbn, StringComparison.Ordinal);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = Authors.OrderBy(t => t).SequenceEqual(newObj.Authors.OrderBy(t => t)) ? 1 : 0;
+            if (cmp != 0)
+                return cmp;
+
+            cmp = string.Compare(Name, newObj.Name, StringComparison.Ordinal);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = string.Compare(PubCity, newObj.PubCity, StringComparison.Ordinal);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = string.Compare(PubName, newObj.PubName, StringComparison.Ordinal);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = PubYear.CompareTo(newObj.PubYear);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = string.Compare(Note, newObj.Note, StringComparison.Ordinal);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = CountPages.CompareTo(newObj.CountPages);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = Price.CompareTo(newObj.Price);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = CountCopies.CompareTo(newObj.CountCopies);
+            if (cmp != 0)
+                return cmp;
+
+            return 0;
         }
     }
 }

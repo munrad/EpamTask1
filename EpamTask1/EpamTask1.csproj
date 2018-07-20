@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,7 +56,6 @@
     <Compile Include="Core\Extensions\Extensions.cs" />
     <Compile Include="Core\Extensions\Logger.cs" />
     <Compile Include="Core\Extensions\Validator.cs" />
-    <Compile Include="Core\Interfaces\Catalog\ICatalog.cs" />
     <Compile Include="Core\Interfaces\IBook.cs" />
     <Compile Include="Core\Interfaces\CoreLibrary\ILetters.cs" />
     <Compile Include="Core\Interfaces\CoreLibrary\ILibraryObject.cs" />

@@ -57,5 +57,60 @@ namespace EpamTask1.Core.Classes
                 return hashCode;
             }
         }
+
+        public int CompareTo(object obj)
+        {
+            var newObj = obj as Paper;
+            if (ReferenceEquals(this, newObj))
+                return 0;
+            else if (newObj == null)
+                return 1;
+
+            var cmp = string.Compare(Issn, newObj.Issn, StringComparison.Ordinal);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = DateTime.Compare(Date, newObj.Date);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = string.Compare(Name, newObj.Name, StringComparison.Ordinal);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = string.Compare(PubCity, newObj.PubCity, StringComparison.Ordinal);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = string.Compare(PubName, newObj.PubName, StringComparison.Ordinal);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = Number.CompareTo(newObj.Number);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = CountCopies.CompareTo(newObj.CountCopies);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = string.Compare(Note, newObj.Note, StringComparison.Ordinal);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = CountPages.CompareTo(newObj.CountPages);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = Price.CompareTo(newObj.Price);
+            if (cmp != 0)
+                return cmp;
+
+            cmp = PubYear.CompareTo(newObj.PubYear);
+            if (cmp != 0)
+                return cmp;
+
+            return 0;
+        }
     }
 }
