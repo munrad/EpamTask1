@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EpamTask1.Core.Attributes;
 using EpamTask1.Core.Interfaces;
 
 namespace EpamTask1.Core.Classes
@@ -7,14 +8,24 @@ namespace EpamTask1.Core.Classes
     public class Patent : IPatent
     {
         public int RegNumber { get; set; }
+        [IsNotNullOrEmpty]
         public string Country { get; set; }
+        [IsNotNullOrEmpty]
         public List<string> Inventors { get; set; }
+        [IsNotNullOrEmpty]
+        [Limit(PubYear = 1950)]
         public DateTime AppDate { get; set; }
+        [IsNotNullOrEmpty]
+        [Limit(PubYear = 1950)]
         public DateTime PubDate { get; set; }
+        [IsNotNullOrEmpty]
         public string Name { get; set; }
+        [Limit(Lenght = 500)]
         public string Note { get; set; }
         public int CountPages { get; set; }
         public int PubYear { get; set; }
+        [IsNotNullOrEmpty]
+        [IsNotLessZero]
         public int Price { get; set; }
 
         public override bool Equals(object obj)

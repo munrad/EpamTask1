@@ -6,17 +6,25 @@ namespace EpamTask1.Core.Classes
 {
     public class Paper : IPaper
     {
+        [IsNotLessZero]
         public int Number { get; set; }
         public string Issn { get; set; }
+        [IsNotNullOrEmpty]
         public DateTime Date { get; set; }
         public string PubCity { get; set; }
+        [IsNotNullOrEmpty]
         public string PubName { get; set; }
         public int PubYear { get; set; }
         [IsNotNullOrEmpty]
         public string Name { get; set; }
+        [Limit(Lenght = 500)]
         public string Note { get; set; }
+        [Limit(CountPages = 1)]
         public int CountPages { get; set; }
+        [IsNotLessZero]
+        [IsNotNullOrEmpty]
         public int Price { get; set ; }
+        [IsNotLessZero]
         public int CountCopies { get; set; }
 
         public override bool Equals(object obj)

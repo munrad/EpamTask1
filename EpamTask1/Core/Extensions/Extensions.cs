@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EpamTask1.Core.Classes;
 using EpamTask1.Core.Interfaces;
+using System.IO;
 
 namespace EpamTask1.Core.Extensions
 {
@@ -53,6 +54,11 @@ namespace EpamTask1.Core.Extensions
             });
             str = str.Remove(str.LastIndexOf('>'), 1);
             list.Add(str);
+        }
+
+        public static void AddToLog(string message)
+        {
+            File.AppendAllText("error.log", $"{DateTime.Now.ToUniversalTime()}: {message}{Environment.NewLine}");
         }
     }
 }

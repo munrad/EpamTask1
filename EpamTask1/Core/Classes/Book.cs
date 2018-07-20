@@ -7,16 +7,25 @@ namespace EpamTask1.Core.Classes
 {
     public class Book : IBook
     {
-        [IsNotNullOrEmpty]
         public string Isbn { get; set; }
+        [IsNotNullOrEmpty]
         public List<string> Authors { get; set; }
+        [IsNotNullOrEmpty]
         public string PubCity { get; set; }
+        [IsNotNullOrEmpty]
         public string PubName { get; set; }
+        [Limit(PubYear = 1900)]
         public int PubYear { get; set; }
+        [IsNotNullOrEmpty]
         public string Name { get; set; }
+        [Limit(Lenght = 500)]
         public string Note { get; set; }
+        [Limit(CountPages = 1)]
         public int CountPages { get; set; }
+        [IsNotLessZero]
+        [IsNotNullOrEmpty]
         public int Price { get; set; }
+        [IsNotLessZero]
         public int CountCopies { get; set; }
 
         public override bool Equals(object obj)

@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Attributes\Limit.cs" />
+    <Compile Include="Core\Attributes\IsNotLessZero.cs" />
     <Compile Include="Core\Attributes\IsNotNullOrEmpty.cs" />
     <Compile Include="Core\Catalog.cs" />
     <Compile Include="Core\Classes\Book.cs" />
@@ -60,6 +62,5 @@
     <Compile Include="Library.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
