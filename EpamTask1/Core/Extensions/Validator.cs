@@ -52,10 +52,10 @@ namespace EpamTask1.Core.Extensions
                     catch (Exception e)
                     {          
                         if (isForce)
-                            Extensions.AddToLog(e.Message);
+                            Logger.AddToLog(e.Message);
                         else
                         {
-                            Extensions.AddToLog($"Работа завершена с ошибкой {e.Message}");
+                            Logger.AddToLog($"Работа завершена с ошибкой {e.Message}");
                             Environment.Exit(0);
                         }
 

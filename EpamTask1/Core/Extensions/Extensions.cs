@@ -20,19 +20,17 @@ namespace EpamTask1.Core.Extensions
                 var objTmpList = new List<ICatalogObject>();
                 foreach (var item in file)
                 {             
-                    var tmp = item.Split('/');                   
-                    var tmp1 = tmp[1].Split('>');
+                    var objMySerialize = item.Split('/');                   
+                    var arrTypeObj = objMySerialize[1].Split('>');
                     
-                    var typeObj = Activator.CreateInstance(Type.GetType(tmp[0]) 
+                    var typeObj = Activator.CreateInstance(Type.GetType(objMySerialize[0]) 
                                                            ?? throw new InvalidOperationException());
-
-                    foreach (var s in tmp1)
+                    foreach (var allProp in arrTypeObj)
                     {
-                        var tmp2 = s.Split('\\');                     
-                        var tmp3 = tmp2[1].Split(':');
-                        var type = tmp2[0];
-                        var name = tmp3[0];
-                        var val = tmp3[1];
+                        var typeAndProp = allProp.Split('\\');                     
+                        var nameAndVal = typeAndProp[1].Split(':');
+                        var name = nameAndVal[0];
+                        var val = nameAndVal[1];
                         ObjectCreator(ref typeObj, name, val);                       
                     }
 
@@ -44,7 +42,7 @@ namespace EpamTask1.Core.Extensions
             }
             catch (Exception e)
             {
-
+                Logger.AddToLog(e.Message);
             }
         }
 
@@ -76,14 +74,15 @@ namespace EpamTask1.Core.Extensions
             }
         }
 
-        public static void Serializer<T>(ref List<string> list, T obj)
+        public static void Serializer<T>(List<string> list, T obj)
         {
             var type = typeof(T);
             var prop = type.GetProperties();
-            var str = $"{type.FullName}/";
-            str = prop.Aggregate(str, (current, propertyInfo) =>
+            var builder = new StringBuilder();
+            builder.Append($"{type.FullName}/");
+            builder = prop.Aggregate(builder, (current, propertyInfo) =>
             {
-                var result = current + $"{propertyInfo.PropertyType}\\{propertyInfo.Name}:";
+                builder.Append($"{current}{propertyInfo.PropertyType}\\{propertyInfo.Name}:");
                 if (propertyInfo.PropertyType == typeof(List<string>))
                 {
                     var propVal = string.Empty;
@@ -92,26 +91,22 @@ namespace EpamTask1.Core.Extensions
                         propVal = listTmp.Cast<object>().Aggregate(propVal, (current1, n) => current1 + $"{n}|");
                         propVal = propVal.Remove(propVal.LastIndexOf('|'), 1);
                     }
-                    result += $"{propVal}>";
+                    builder.Append($"{propVal}>");
                 }
                 else if (propertyInfo.PropertyType == typeof(DateTime))
                 {
                     var date = (DateTime)propertyInfo.GetValue(obj, null);
-                    result += $"{date.ToShortDateString()}>";
+                    builder.Append($"{date.ToShortDateString()}>");
                 }
                 else
                 {
-                    result += $"{propertyInfo.GetValue(obj)}>";
+                    builder.Append($"{propertyInfo.GetValue(obj)}>");
                 }
-                return result;
+                return builder;
             });
-            str = str.Remove(str.LastIndexOf('>'), 1);
-            list.Add(str);
-        }
 
-        public static void AddToLog(string message)
-        {
-            File.AppendAllText("error.log", $"{DateTime.Now.ToUniversalTime()}: {message}{Environment.NewLine}");
+            builder = builder.Remove(builder.ToString().LastIndexOf('>'), 1);
+            list.Add(builder.ToString());
         }
     }
 }

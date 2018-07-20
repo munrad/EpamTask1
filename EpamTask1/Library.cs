@@ -74,19 +74,22 @@ namespace EpamTask1
         public void Save(string objectName)
         {
             var list = new List<string>();
-            if (!(GetAllObjects() is List<ICatalogObject> cat)) throw new Exception("Каталог пуст!");
-            foreach (var t in cat)
+            if (!(GetAllObjects() is List<ICatalogObject> catalogLocal))
             {
-                switch (t)
+                throw new Exception("Каталог пуст!");
+            }
+            foreach (var catItem in catalogLocal)
+            {
+                switch (catItem)
                 {
                     case IPaper paper:
-                        Extensions.Serializer(ref list, paper as Paper);
+                        Extensions.Serializer(list, paper as Paper);
                         break;
                     case IBook book:
-                        Extensions.Serializer(ref list, book as Book);
+                        Extensions.Serializer(list, book as Book);
                         break;
                     case IPatent patent:
-                        Extensions.Serializer(ref list, patent as Patent);
+                        Extensions.Serializer(list, patent as Patent);
                         break;
                 }
             }

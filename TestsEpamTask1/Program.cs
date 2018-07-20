@@ -15,7 +15,6 @@ namespace TestsEpamTask1
     {
         static void Main(string[] args)
         {
-            var lib = new Library();
         }
     }
 }

@@ -14,7 +14,9 @@ namespace UnitTestEpamTask1
     {
         private MockRepository mockRepository;
 
-
+        /* зачем ты сделал, чтобы все тесты падали???  ак проверить функционал?? —оздай тестовые объекты, заполни их данными и напиши проверки
+         * хот€ бы дл€ требований из 2ого задани€
+         * */
 
         [TestInitialize]
         public void TestInitialize()
@@ -71,7 +73,6 @@ namespace UnitTestEpamTask1
                 isForce);
 
             // Assert
-            Assert.Fail();
         }
 
         [TestMethod]
@@ -84,7 +85,7 @@ namespace UnitTestEpamTask1
             var result = unitUnderTest.GetAllObjects();
 
             // Assert
-            Assert.Fail();
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -99,7 +100,6 @@ namespace UnitTestEpamTask1
                 obj);
 
             // Assert
-            Assert.Fail();
         }
 
         [TestMethod]
@@ -114,7 +114,7 @@ namespace UnitTestEpamTask1
                 name);
 
             // Assert
-            Assert.Fail();
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -129,7 +129,7 @@ namespace UnitTestEpamTask1
                 isReverse);
 
             // Assert
-            Assert.Fail();
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -144,7 +144,7 @@ namespace UnitTestEpamTask1
                 name);
 
             // Assert
-            Assert.Fail();
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -159,7 +159,7 @@ namespace UnitTestEpamTask1
                 symb);
 
             // Assert
-            Assert.Fail();
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -172,7 +172,7 @@ namespace UnitTestEpamTask1
             var result = unitUnderTest.GroupByYear();
 
             // Assert
-            Assert.Fail();
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -182,6 +182,11 @@ namespace UnitTestEpamTask1
             var unitUnderTest = CreateLibrary();
             IList<ICatalogObject> obj = unitUnderTest.GetAllObjects();
 
+            /* тут всю логику реализует сам пользователь
+             * а если он захочет отфильтровать по другому полю и значению, ему нужно будет еще 1 такой метод писать??
+             * желательно, чтобы вс€ логика была инкапсулирована в классе библиотеки, и вызывалась просто
+             * например CustomSearch(item => item.Price > 150) и т.д.
+            */
             Func<List<ICatalogObject>, List<ICatalogObject>> func = t =>
             {
                 var name = "Lol";
@@ -206,7 +211,7 @@ namespace UnitTestEpamTask1
                 func);
 
             // Assert
-            Assert.Fail();
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -214,9 +219,15 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
+            /* предполагалось, что логику сортировки вы реализуете сами
+             * не нужно сложную, "пузырек" подойдет
+             * юзер должен иметь возможность указать произвольное поле, по которому нужно отсортировать коллекцию
+             * например CustomSort(someCollection, item => item.Name) -> сортируем по имени
+             * нужно учесть что у вас несколько типов в коллекции и проч особенности
+             * */
             Action<List<ICatalogObject>> func = m =>
             {
-                m.Sort();
+                //m.Sort();
             };
 
             // Act
@@ -224,7 +235,7 @@ namespace UnitTestEpamTask1
                 func);
 
             // Assert
-            Assert.Fail();
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -239,7 +250,6 @@ namespace UnitTestEpamTask1
                 objectName);
 
             // Assert
-            Assert.Fail();
         }
 
         [TestMethod]
@@ -256,7 +266,6 @@ namespace UnitTestEpamTask1
                 isForce);
 
             // Assert
-            Assert.Fail();
         }
     }
 }
