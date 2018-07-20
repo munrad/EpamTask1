@@ -18,7 +18,7 @@ namespace EpamTask1.Core
             CatalogObjects = new List<ICatalogObject>();
         }
 
-        public void Add(ICatalogObject obj, bool isForce = false)
+        public void Add(ICatalogObject obj, bool isForce = true)
         {
             Validator.ValidateProp(obj, isForce);
             CatalogObjects.Add(obj);

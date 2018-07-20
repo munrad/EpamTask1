@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using EpamTask1.Core.Interfaces;
 using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core.Extensions
@@ -29,14 +28,6 @@ namespace EpamTask1.Core.Extensions
                     return -1;
 
                 return 0;
-            }
-        }
-
-        public class SortByPubName : IComparer<IBook>
-        {
-            public int Compare(IBook x, IBook y)
-            {
-                return string.CompareOrdinal(x?.PubName, y?.PubName);
             }
         }
     }

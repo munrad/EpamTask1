@@ -21,7 +21,7 @@ namespace EpamTask1
             catalog = new Catalog();
         }
 
-        public void Add(ICatalogObject obj, bool isForce = false)
+        public void Add(ICatalogObject obj, bool isForce = true)
         {
             catalog.Add(obj, isForce);
         }
@@ -87,7 +87,7 @@ namespace EpamTask1
         public void Load(string objectName, bool isForce = false)
         {
             var obj = File.ReadAllLines(objectName).ToList();
-            Extensions.Deserialize(ref catalog.CatalogObjects, obj);
+            Extensions.Deserialize(ref catalog.CatalogObjects, obj, isForce);
         }
     }
 }

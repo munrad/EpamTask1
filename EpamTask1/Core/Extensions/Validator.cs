@@ -15,7 +15,7 @@ namespace EpamTask1.Core.Extensions
     public class Validator
     {
         private const string IsNull = "Обьект пуст или равен null";
-        private const string IsZero = "Обьект меньше лиюл равен нулю";
+        private const string IsZero = "Обьект меньше или равен нулю";
         private const string IsLimit = "Обьект не удовлетворяет условиям органичения значения";
 
         public static void ValidateProp<T>(T myObject, bool isForce = false)
@@ -37,7 +37,7 @@ namespace EpamTask1.Core.Extensions
                         }
                         if (typeAttr == typeof(IsNotLessZero))
                         {
-                            var flag = IsAnyNullOrEmpty(propertyInfo, myObject);
+                            var flag = IsNotLessZero(propertyInfo, myObject);
                             if (flag)
                                 throw new Exception($"{propertyInfo.Name} - {IsZero}");
                         }
@@ -66,20 +66,29 @@ namespace EpamTask1.Core.Extensions
 
         private static bool Limit(IEnumerable<CustomAttributeNamedArgument> nm, PropertyInfo pi, object myObject)
         {
-            foreach (var customAttributeNamedArgument in nm)
+
+            foreach (var custArgument in nm)
             {
-                
-            }
-            if (pi.PropertyType != typeof(int)) return false;
-            var value = (int)pi.GetValue(myObject);
-            if (value <= 0)
-            {
-                return true;
+                if (pi.PropertyType != typeof(int)) return false;
+                var value = (int)pi.GetValue(myObject);
+                var name = custArgument.MemberName;
+                if (name.Equals("PubYear") && pi.GetValue(myObject) is DateTime valueDate)
+                {
+                    return valueDate.Year >= (int)custArgument.TypedValue.Value;
+                }
+                if (name.Equals("CountPages") || name.Equals("PubYear"))
+                {
+                    return value >= (int)custArgument.TypedValue.Value;
+                }
+                if (name.Equals("Lenght"))
+                {
+                    return value <= (int)custArgument.TypedValue.Value;
+                }
             }
             return false;
         }
 
-        private static bool IsNotLessZero(PropertyInfo pi, object myObject)
+        private static bool IsAnyNullOrEmpty(PropertyInfo pi, object myObject)
         {
             if (pi.PropertyType == typeof(string))
             {
@@ -116,7 +125,7 @@ namespace EpamTask1.Core.Extensions
             return false;
         }
 
-        private static bool IsAnyNullOrEmpty(PropertyInfo pi, object myObject)
+        private static bool IsNotLessZero(PropertyInfo pi, object myObject)
         {
             if (pi.PropertyType != typeof(int)) return false;
             var value = (int)pi.GetValue(myObject);
