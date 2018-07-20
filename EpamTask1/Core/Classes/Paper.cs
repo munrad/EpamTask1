@@ -27,6 +27,14 @@ namespace EpamTask1.Core.Classes
         [IsNotLessZero]
         public int CountCopies { get; set; }
 
+        public Paper()
+        {
+            CountPages = 1;
+            Number = PubYear = Price = CountCopies = 0;
+            Issn = PubCity = PubName = Name = Note = "";
+            Date = new DateTime();
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is null) return false;

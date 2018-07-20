@@ -8,7 +8,7 @@ using EpamTask1.Core.Classes;
 using EpamTask1.Core.Extensions;
 using EpamTask1.Core.Interfaces;
 using EpamTask1.Core.Interfaces.Catalog;
-using Catalog = EpamTask1.Core.Catalog;
+using static EpamTask1.Core.Catalog;
 
 namespace EpamTask1
 {
@@ -61,9 +61,14 @@ namespace EpamTask1
             return catalog.GroupByYear();
         }
 
-        public IList<ICatalogObject> Sort<T>(Catalog.CustomSortDel<T> func) where T : IComparable
+        public IList<ICatalogObject> CustomSort<T>(CustomSortDel<T> func) where T : IComparable
+        {            
+            return catalog.CustomSort(func);
+        }
+
+        public IList<ICatalogObject> CustomSearch(CustomSearchDel func)
         {
-            return catalog.Sort(func);
+            return catalog.CustomSearch(func);
         }
 
         public void Save(string objectName)

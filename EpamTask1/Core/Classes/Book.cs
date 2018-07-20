@@ -10,7 +10,7 @@ namespace EpamTask1.Core.Classes
     {
         public string Isbn { get; set; }
         [IsNotNullOrEmpty]
-        public List<string> Authors { get; set; }
+        public List<string> Authors { get; set; } 
         [IsNotNullOrEmpty]
         public string PubCity { get; set; }
         [IsNotNullOrEmpty]
@@ -28,6 +28,15 @@ namespace EpamTask1.Core.Classes
         public int Price { get; set; }
         [IsNotLessZero]
         public int CountCopies { get; set; }
+
+        public Book()
+        {
+            Authors = new List<string>();
+            Isbn = PubCity = Name = Note = "";
+            CountPages = 1;
+            Price = CountCopies = 0;
+            PubYear = 1900;
+        }
 
         public override bool Equals(object obj)
         {

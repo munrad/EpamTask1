@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
+using EpamTask1.Core;
 using EpamTask1.Core.Classes;
 using EpamTask1.Core.Interfaces;
 
@@ -64,7 +65,7 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
-            ICatalogObject obj = new Book() {Name = "Test"};
+            ICatalogObject obj = new Book() { Name = "Test" };
             bool isForce = true;
 
             // Act
@@ -180,36 +181,16 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
-
-            /* тут всю логику реализует сам пользователь
-             * а если он захочет отфильтровать по другому полю и значению, ему нужно будет еще 1 такой метод писать??
-             * желательно, чтобы вся логика была инкапсулирована в классе библиотеки, и вызывалась просто
-             * например CustomSearch(item => item.Price > 150) и т.д.
-            */
-            Func<List<ICatalogObject>, List<ICatalogObject>> func = t =>
-            {
-                var name = "Lol";
-                var arrResult = new List<ICatalogObject>();
-                foreach (var m in t)
-                {
-                    if (!(m is IBook book)) break;
-                    var arrAuthors = book.Authors;
-                    if (arrAuthors == null) break;
-                    foreach (var n in arrAuthors)
-                    {
-                        if (!n.Contains(name)) continue;
-                        arrResult.Add(book);
-                        break;
-                    }
-                }
-                return arrResult;
-            };
             // Act
-            //var result = unitUnderTest.Search(
-            //    func);
+            var result = unitUnderTest.CustomSearch(m =>
+            {
+                if (m is Book tr)
+                    return tr.Name.Equals("4");
+                return false;
+            });
 
             // Assert
-            //Assert.IsNotNull(result);
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]
@@ -217,23 +198,15 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
-            /* предполагалось, что логику сортировки вы реализуете сами
-             * не нужно сложную, "пузырек" подойдет
-             * юзер должен иметь возможность указать произвольное поле, по которому нужно отсортировать коллекцию
-             * например CustomSort(someCollection, item => item.Name) -> сортируем по имени
-             * нужно учесть что у вас несколько типов в коллекции и проч особенности
-             * */
-            Action<List<ICatalogObject>> func = m =>
-            {
-                //m.Sort();
-            };
-
             // Act
-            //var result = unitUnderTest.Sort(
-            //   func);
-
-            // Assert
-            //Assert.IsNotNull(result);
+            var result = unitUnderTest.CustomSort(m =>
+            {
+                if (m is Book tr)
+                    return tr.PubYear;
+                return 0;
+            });
+            //Assert
+            Assert.IsNotNull(result);
         }
 
         [TestMethod]

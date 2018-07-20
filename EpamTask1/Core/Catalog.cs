@@ -11,13 +11,12 @@ namespace EpamTask1.Core
     public sealed class Catalog
     {       
         public List<ICatalogObject> CatalogObjects;
-        public int PubYear { get; set; }
 
-        public delegate T CustomSortDel<T>(T obj);
+        public delegate T CustomSortDel<out T>(ICatalogObject obj);
+        public delegate bool CustomSearchDel(ICatalogObject obj);
 
         public Catalog()
-        {
-            
+        {           
             CatalogObjects = new List<ICatalogObject>();
         }
 
@@ -58,24 +57,33 @@ namespace EpamTask1.Core
             return result;
         }
 
-        public IList<ICatalogObject> Sort<T>(CustomSortDel<T> func) where T : IComparable
+        public IList<ICatalogObject> CustomSort<T>(CustomSortDel<T> func) where T : IComparable
         {
-            var cat = CatalogObjects as List<T>;
-            if (cat != null)
-                for (var i = 0; i < cat.Count; i++)
+            for (var i = 0; i < CatalogObjects.Count; i++)
+            {
+                for (var j = i; j < CatalogObjects.Count; j++)
                 {
-                    for (var j = i; j < cat.Count; j++)
-                    {
-                        if (func(cat[j]).CompareTo(func(cat[i])) < 0)
-                        {
-                            var tmp = cat[i];
-                            cat[i] = cat[j];
-                            cat[j] = tmp;
-                        }
-                    }
+                    if (func(CatalogObjects[j]).CompareTo(func(CatalogObjects[i])) >= 0) continue;
+                    var tmp = CatalogObjects[i];
+                    CatalogObjects[i] = CatalogObjects[j];
+                    CatalogObjects[j] = tmp;
                 }
+            }
 
-            return cat as IList<ICatalogObject>;
+            return CatalogObjects;
+        }
+
+        public IList<ICatalogObject> CustomSearch(CustomSearchDel func)
+        {
+            var result = new List<ICatalogObject>();
+            foreach (var catalogObject in CatalogObjects)
+            {
+                if (func(catalogObject))
+                {
+                    result.Add(catalogObject);
+                }
+            }
+            return result;
         }
 
         public IList<ICatalogObject> SortByYear(bool isReverse = false)

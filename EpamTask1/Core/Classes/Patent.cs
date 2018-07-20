@@ -29,6 +29,13 @@ namespace EpamTask1.Core.Classes
         [IsNotLessZero]
         public int Price { get; set; }
 
+        public Patent()
+        {
+            Country = Name = Note = "";
+            Price = PubYear = CountPages = RegNumber = 0;           
+            Inventors = new List<string>();
+            AppDate = PubDate = new DateTime(1950, 1, 1);
+        }
         public override bool Equals(object obj)
         {
             if (obj is null) return false;
@@ -67,11 +74,11 @@ namespace EpamTask1.Core.Classes
                 return 1;
 
 
-            var cmp = Inventors.OrderBy(t => t).SequenceEqual(newObj.Inventors.OrderBy(t => t)) ? 1 : 0;
+            var cmp = DateTime.Compare(PubDate, newObj.PubDate);
             if (cmp != 0)
                 return cmp;
 
-            cmp = DateTime.Compare(PubDate, newObj.PubDate);
+            cmp = Inventors.OrderBy(t => t).SequenceEqual(newObj.Inventors.OrderBy(t => t)) ? 1 : 0;
             if (cmp != 0)
                 return cmp;
 
