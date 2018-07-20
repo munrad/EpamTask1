@@ -3,6 +3,7 @@ using EpamTask1.Core.Interfaces.Catalog;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
+using System.Collections.Generic;
 using EpamTask1.Core.Classes;
 
 namespace UnitTestEpamTask1
@@ -12,14 +13,10 @@ namespace UnitTestEpamTask1
     {
         private MockRepository mockRepository;
 
-
-
         [TestInitialize]
         public void TestInitialize()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
         }
 
         [TestCleanup]
@@ -30,7 +27,31 @@ namespace UnitTestEpamTask1
 
         private Library CreateLibrary()
         {
-            return new Library();
+            var lib = new Library();
+            lib.Add(new Patent { PubDate = new DateTime(1994, 01, 01) });
+            lib.Add(new Book { Authors = new List<string> { "h", "u", "k" } });
+            lib.Add(new Book { Isbn = "2" });
+            lib.Add(new Book());
+            lib.Add(new Book { Isbn = "1" });
+            lib.Add(new Book { Name = "3" });
+            lib.Add(new Book { Name = "4" });
+            lib.Add(new Paper { Name = "4" });
+            lib.Add(new Book { PubYear = 1994 });
+            lib.Add(new Book { PubYear = 1995 });
+            lib.Add(new Book { PubYear = 1999 });
+            lib.Add(new Book { Authors = new List<string> { "Lol", "Kek" } });
+            lib.Add(new Book { Authors = new List<string> { "Lol", "Kek", "Cheburek" } });
+            lib.Add(new Book { PubName = "Kek" });
+            lib.Add(new Book { PubName = "Kek 33" });
+            lib.Add(new Book { PubName = "Kek" });
+            lib.Add(new Book { PubName = "Kek 22" });
+            lib.Add(new Book { PubName = "Kek" });
+            lib.Add(new Book { PubName = "Kek 22" });
+            lib.Add(new Book { PubName = "Kek 33" });
+            lib.Add(new Book { PubName = "Kuk" });
+            lib.Add(new Paper { PubYear = 1994 });
+            lib.Add(new Patent { PubDate = new DateTime(1994, 01, 01) });
+            return lib;
         }
 
         [TestMethod]
@@ -83,7 +104,7 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
-            string name = "TestName";
+            string name = "Kek";
 
             // Act
             var result = unitUnderTest.SearchByName(
@@ -113,7 +134,7 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
-            string name = "TestAuthor";
+            string name = "Lol";
 
             // Act
             var result = unitUnderTest.SearchBooksByAuthors(
@@ -128,7 +149,7 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
-            string symb = "Test";
+            string symb = "Ke";
 
             // Act
             var result = unitUnderTest.GetSortBooks(
