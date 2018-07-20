@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpamTask1", "EpamTask1\Epam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsEpamTask1", "TestsEpamTask1\TestsEpamTask1.csproj", "{2B5C5060-80A9-4F86-9782-084D1FB106F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestEpamTask1", "UnitTestEpamTask1\UnitTestEpamTask1.csproj", "{6C0B3C5A-D3BC-43F3-AD41-5DCB6D532C6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestEpamTask1", "UnitTestEpamTask1\UnitTestEpamTask1.csproj", "{0A0C9223-CB7C-4417-B39B-664D4B0A6E62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{2B5C5060-80A9-4F86-9782-084D1FB106F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B5C5060-80A9-4F86-9782-084D1FB106F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B5C5060-80A9-4F86-9782-084D1FB106F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C0B3C5A-D3BC-43F3-AD41-5DCB6D532C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C0B3C5A-D3BC-43F3-AD41-5DCB6D532C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C0B3C5A-D3BC-43F3-AD41-5DCB6D532C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C0B3C5A-D3BC-43F3-AD41-5DCB6D532C6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A0C9223-CB7C-4417-B39B-664D4B0A6E62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A0C9223-CB7C-4417-B39B-664D4B0A6E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A0C9223-CB7C-4417-B39B-664D4B0A6E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A0C9223-CB7C-4417-B39B-664D4B0A6E62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
