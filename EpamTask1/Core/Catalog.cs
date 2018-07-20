@@ -55,13 +55,13 @@ namespace EpamTask1.Core
             return result;
         }
 
-        public IList<ICatalogObject> Search(object obj, Func<object, IList<ICatalogObject>> func)
+        public IList<ICatalogObject> Search(object obj, Func<List<ICatalogObject>, List<ICatalogObject>> func)
         {
-            var result = func(obj);
+            var result = func(CatalogObjects);
             return result;
         }
 
-        public IList<ICatalogObject> Sort(Action<IList<ICatalogObject>> func)
+        public IList<ICatalogObject> Sort(Action<List<ICatalogObject>> func)
         {
             func.Invoke(CatalogObjects);
             return CatalogObjects;

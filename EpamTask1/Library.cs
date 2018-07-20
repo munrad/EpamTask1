@@ -61,12 +61,12 @@ namespace EpamTask1
             return catalog.GroupByYear();
         }
 
-        public IList<ICatalogObject> Search(object obj, Func<object, IList<ICatalogObject>> func)
+        public IList<ICatalogObject> Search(object obj, Func<List<ICatalogObject>, List<ICatalogObject>> func)
         {
             return catalog.Search(obj, func);
         }
 
-        public IList<ICatalogObject> Sort(Action<IList<ICatalogObject>> func)
+        public IList<ICatalogObject> Sort(Action<List<ICatalogObject>> func)
         {
             return catalog.Sort(func);
         }

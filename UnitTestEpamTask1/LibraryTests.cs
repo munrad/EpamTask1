@@ -5,6 +5,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using EpamTask1.Core.Classes;
+using EpamTask1.Core.Interfaces;
 
 namespace UnitTestEpamTask1
 {
@@ -12,6 +13,8 @@ namespace UnitTestEpamTask1
     public class LibraryTests
     {
         private MockRepository mockRepository;
+
+
 
         [TestInitialize]
         public void TestInitialize()
@@ -59,7 +62,7 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
-            ICatalogObject obj = new Book();
+            ICatalogObject obj = new Book() {Name = "Test"};
             bool isForce = true;
 
             // Act
@@ -89,7 +92,7 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
-            ICatalogObject obj = new Paper();
+            ICatalogObject obj = new Book();
 
             // Act
             unitUnderTest.Remove(
@@ -104,7 +107,7 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
-            string name = "Kek";
+            string name = "Test";
 
             // Act
             var result = unitUnderTest.SearchByName(
@@ -149,7 +152,7 @@ namespace UnitTestEpamTask1
         {
             // Arrange
             var unitUnderTest = CreateLibrary();
-            string symb = "Ke";
+            string symb = "Kek";
 
             // Act
             var result = unitUnderTest.GetSortBooks(
@@ -167,6 +170,58 @@ namespace UnitTestEpamTask1
 
             // Act
             var result = unitUnderTest.GroupByYear();
+
+            // Assert
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void Search_StateUnderTest_ExpectedBehavior()
+        {
+            // Arrange
+            var unitUnderTest = CreateLibrary();
+            IList<ICatalogObject> obj = unitUnderTest.GetAllObjects();
+
+            Func<List<ICatalogObject>, List<ICatalogObject>> func = t =>
+            {
+                var name = "Lol";
+                var arrResult = new List<ICatalogObject>();
+                foreach (var m in t)
+                {
+                    if (!(m is IBook book)) break;
+                    var arrAuthors = book.Authors;
+                    if (arrAuthors == null) break;
+                    foreach (var n in arrAuthors)
+                    {
+                        if (!n.Contains(name)) continue;
+                        arrResult.Add(book);
+                        break;
+                    }
+                }
+                return arrResult;
+            };
+            // Act
+            var result = unitUnderTest.Search(
+                obj,
+                func);
+
+            // Assert
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void Sort_StateUnderTest_ExpectedBehavior()
+        {
+            // Arrange
+            var unitUnderTest = CreateLibrary();
+            Action<List<ICatalogObject>> func = m =>
+            {
+                m.Sort();
+            };
+
+            // Act
+            var result = unitUnderTest.Sort(
+                func);
 
             // Assert
             Assert.Fail();
