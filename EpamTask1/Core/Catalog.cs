@@ -55,6 +55,18 @@ namespace EpamTask1.Core
             return result;
         }
 
+        public IList<ICatalogObject> Search(object obj, Func<object, IList<ICatalogObject>> func)
+        {
+            var result = func(obj);
+            return result;
+        }
+
+        public IList<ICatalogObject> Sort(Action<IList<ICatalogObject>> func)
+        {
+            func.Invoke(CatalogObjects);
+            return CatalogObjects;
+        }
+
         public IList<ICatalogObject> SortByYear(bool isReverse = false)
         {
             CatalogObjects.Sort(new Comparers.SortByYear { IsReverse = isReverse });

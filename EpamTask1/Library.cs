@@ -61,6 +61,16 @@ namespace EpamTask1
             return catalog.GroupByYear();
         }
 
+        public IList<ICatalogObject> Search(object obj, Func<object, IList<ICatalogObject>> func)
+        {
+            return catalog.Search(obj, func);
+        }
+
+        public IList<ICatalogObject> Sort(Action<IList<ICatalogObject>> func)
+        {
+            return catalog.Sort(func);
+        }
+
         public void Save(string objectName)
         {
             var list = new List<string>();
