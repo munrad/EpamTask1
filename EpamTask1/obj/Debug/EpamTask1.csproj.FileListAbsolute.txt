@@ -1,6 +1,0 @@
-D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\obj\Debug\EpamTask1.csprojAssemblyReference.cache
-D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\obj\Debug\EpamTask1.csproj.CoreCompileInputs.cache
-D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\bin\Debug\EpamTask1.dll
-D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\bin\Debug\EpamTask1.pdb
-D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\obj\Debug\EpamTask1.dll
-D:\Work\Epam\C#\Base\EpamTask1\EpamTask1\obj\Debug\EpamTask1.pdb
