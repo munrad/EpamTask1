@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace EpamTask1.Core.Interfaces
 {
-    interface IUser
+    public interface IUser
     {
         string Name { get; set; }
         int NumTicket { get; set; }
         DateTime DateReg { get; set; }
         int PhoneNum { get; set; }
-        bool isBlock { get; set; }
+        bool IsBlock { get; set; }
         string City { get; set; }
-        IBook Book { get; set; }
-        IPaper Paper { get; set; }
-        IPatent Patent { get; set; }
+        List<IBook> Book { get; set; }
+        List<IPaper> Paper { get; set; }
+        List<IPatent> Patent { get; set; }
     }
 }

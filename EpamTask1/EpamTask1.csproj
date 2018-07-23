@@ -53,6 +53,7 @@
     <Compile Include="Core\Classes\Book.cs" />
     <Compile Include="Core\Classes\Paper.cs" />
     <Compile Include="Core\Classes\Patent.cs" />
+    <Compile Include="Core\Classes\User.cs" />
     <Compile Include="Core\Extensions\Comparers.cs" />
     <Compile Include="Core\Extensions\Extensions.cs" />
     <Compile Include="Core\Extensions\Logger.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Core\Interfaces\IPaper.cs" />
     <Compile Include="Core\Interfaces\IPatent.cs" />
     <Compile Include="Core\Interfaces\IUser.cs" />
+    <Compile Include="Core\Users.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

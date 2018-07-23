@@ -8,5 +8,6 @@ namespace EpamTask1.Core.Attributes
 {
     class CustomTemplates
     {
+
     }
 }
