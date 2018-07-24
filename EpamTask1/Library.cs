@@ -26,7 +26,7 @@ namespace EpamTask1
             catalog.Add(obj, isForce);
         }
 
-        public IList<ICatalogObject> GetAllObjects()
+        public List<ICatalogObject> GetAllObjects()
         {
             return catalog.GetAllObjects();
         }
@@ -46,17 +46,17 @@ namespace EpamTask1
             return catalog.SortByYear(isReverse);
         }
 
-        public IList<IBook> SearchBooksByAuthors(string name)
+        public IList<Book> SearchBooksByAuthors(string name)
         {
             return catalog.SearchBooksByAuthors(name);
         }
 
-        public IDictionary<string, IList<IBook>> GetSortBooks(string symb)
+        public IDictionary<string, List<Book>> GetSortBooks(string symb)
         {
             return catalog.GetSortBooks(symb);
         }
 
-        public IDictionary<int, IList<ICatalogObject>> GroupByYear()
+        public IDictionary<int, List<ICatalogObject>> GroupByYear()
         {
             return catalog.GroupByYear();
         }
@@ -82,13 +82,13 @@ namespace EpamTask1
             {
                 switch (catItem)
                 {
-                    case IPaper paper:
+                    case Paper paper:
                         Extensions.Serializer(list, paper as Paper);
                         break;
-                    case IBook book:
+                    case Book book:
                         Extensions.Serializer(list, book as Book);
                         break;
-                    case IPatent patent:
+                    case Patent patent:
                         Extensions.Serializer(list, patent as Patent);
                         break;
                 }
@@ -100,7 +100,7 @@ namespace EpamTask1
         public void Load(string objectName, bool isForce = false)
         {
             var obj = File.ReadAllLines(objectName).ToList();
-            Extensions.Deserialize(ref catalog.CatalogObjects, obj, isForce);
+            Extensions.Deserialize(ref CatalogObjects, obj, isForce);
         }
     }
 }

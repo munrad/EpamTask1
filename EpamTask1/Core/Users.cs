@@ -7,30 +7,29 @@ using EpamTask1.Core.Classes;
 using EpamTask1.Core.Extensions;
 using EpamTask1.Core.Interfaces;
 using EpamTask1.Core.Interfaces.Catalog;
-using EpamTask1.Core.Interfaces.CoreLibrary;
 
 namespace EpamTask1.Core
 {
     public class Users
     {
-        public List<IUser> ListUsers;
+        public List<User> ListUsers;
 
         public Users()
         {
-            ListUsers = new List<IUser>();
+            ListUsers = new List<User>();
         }
 
         //1 and 3 task
-        public List<IUser> GetUsers(Func<IUser, int> func, int value)
+        public List<User> GetUsers(Func<User, int> func, int value)
         {
             return ListUsers.Where(m => func(m) > value) 
-                as List<IUser>;
+                as List<User>;
         }
 
-        public Dictionary<IUser, List<string>> GetPubList()
+        public Dictionary<User, List<string>> GetPubList()
         {
-            var list = new Dictionary<IUser, List<string>>();
-            var catalog = Catalog.GetAllObjects() as List<ICatalogObject>;
+            var list = new Dictionary<User, List<string>>();
+            var catalog = Catalog.CatalogObjects as List<ICatalogObject>;
             try
             {
                 foreach (var listUser in ListUsers)

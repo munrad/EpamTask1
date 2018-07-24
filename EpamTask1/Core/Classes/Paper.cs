@@ -1,10 +1,11 @@
 ﻿using System;
 using EpamTask1.Core.Attributes;
 using EpamTask1.Core.Interfaces;
+using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core.Classes
 {
-    public class Paper : IPaper
+    public class Paper : ICatalogObject, ILetters
     {
         [IsNotLessZero]
         public int Number { get; set; }

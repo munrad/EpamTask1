@@ -11,7 +11,7 @@ namespace EpamTask1.Core
 {
     public sealed class Catalog
     {       
-        private static List<ICatalogObject> catalogObjects;
+        public static List<ICatalogObject> CatalogObjects;
 
         public delegate T CustomSortDel<out T>(ICatalogObject obj);
 
@@ -19,66 +19,59 @@ namespace EpamTask1.Core
 
         public Catalog()
         {           
-            catalogObjects = new List<ICatalogObject>();
+            CatalogObjects = new List<ICatalogObject>();
         }
 
         public void Add(ICatalogObject obj, bool isForce = true)
         {
             Validator.ValidateProp(obj, isForce);
-            catalogObjects.Add(obj);
+            CatalogObjects.Add(obj);
         }
 
         public void Remove(ICatalogObject obj)
         {
-            catalogObjects.RemoveAll(m => m.Equals(obj));
+            CatalogObjects.RemoveAll(m => m.Equals(obj));
         }
 
-        public static IList<ICatalogObject> GetAllObjects()
+        public List<ICatalogObject> GetAllObjects()
         {
-            return catalogObjects;
+            return CatalogObjects;
         }
 
         public IList<ICatalogObject> SearchByName(string name)
         {
             var result = new List<ICatalogObject>();
 
-            foreach (var t in catalogObjects)
+            foreach (var t in CatalogObjects)
             {
-                if (!(t is Book book)) continue;
-                if (book.Name != name) continue;
-                result.Add(t);
-
-                if (!(t is Paper paper)) continue;
-                if (paper.Name != name) continue;
-                result.Add(t);
-
-                if (!(t is Patent patent)) continue;
-                if (patent.Name != name) continue;
-                result.Add(t);
+                if (t.Name.Equals(name))
+                {
+                    result.Add(t);
+                }
             }
             return result;
         }
 
         public IList<ICatalogObject> CustomSort<T>(CustomSortDel<T> func) where T : IComparable
         {
-            for (var i = 0; i < catalogObjects.Count; i++)
+            for (var i = 0; i < CatalogObjects.Count; i++)
             {
-                for (var j = i; j < catalogObjects.Count; j++)
+                for (var j = i; j < CatalogObjects.Count; j++)
                 {
-                    if (func(catalogObjects[j]).CompareTo(func(catalogObjects[i])) >= 0) continue;
-                    var tmp = catalogObjects[i];
-                    catalogObjects[i] = catalogObjects[j];
-                    catalogObjects[j] = tmp;
+                    if (func(CatalogObjects[j]).CompareTo(func(CatalogObjects[i])) >= 0) continue;
+                    var tmp = CatalogObjects[i];
+                    CatalogObjects[i] = CatalogObjects[j];
+                    CatalogObjects[j] = tmp;
                 }
             }
 
-            return catalogObjects;
+            return CatalogObjects;
         }
 
         public IList<ICatalogObject> CustomSearch(CustomSearchDel func)
         {
             var result = new List<ICatalogObject>();
-            foreach (var catalogObject in catalogObjects)
+            foreach (var catalogObject in CatalogObjects)
             {
                 if (func(catalogObject))
                 {
@@ -90,14 +83,14 @@ namespace EpamTask1.Core
 
         public IList<ICatalogObject> SortByYear(bool isReverse = false)
         {
-            catalogObjects.Sort(new Comparers.SortByYear { IsReverse = isReverse });
-            return catalogObjects;
+            CatalogObjects.Sort(new Comparers.SortByYear { IsReverse = isReverse });
+            return CatalogObjects;
         }
 
         public List<Book> SearchBooksByAuthors(string name)
         {
             var arrResult = new List<Book>();
-            foreach (var m in catalogObjects)
+            foreach (var m in CatalogObjects)
             {              
                 if (!(m is Book book)) break;
                 var arrAuthors = book.Authors;             
@@ -116,7 +109,7 @@ namespace EpamTask1.Core
         {
             var arr = new List<Book>();
             var books = new Dictionary<string, List<Book>>();
-            foreach (var m in catalogObjects)
+            foreach (var m in CatalogObjects)
             {
                 if (!(m is Book book)) continue;
                 if (book.PubName == null) continue;
@@ -136,7 +129,7 @@ namespace EpamTask1.Core
         {
             var arr = new List<ICatalogObject>();
             var objects = new Dictionary<int, List<ICatalogObject>>();
-            foreach (var m in catalogObjects)
+            foreach (var m in CatalogObjects)
             {
                 if (m is Patent) continue;
                 arr.Add(m);

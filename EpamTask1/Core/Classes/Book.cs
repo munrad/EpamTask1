@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using EpamTask1.Core.Attributes;
 using EpamTask1.Core.Interfaces;
+using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core.Classes
 {
-    public class Book : IBook
+    public class Book : ICatalogObject, ILetters
     {
         public string Isbn { get; set; }
         [IsNotNullOrEmpty]

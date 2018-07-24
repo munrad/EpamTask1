@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EpamTask1.Core.Interfaces
+namespace EpamTask1.Core.Interfaces.Catalog
 {
-    interface IPatent
+    public interface IPatent
     {
+
     }
 }

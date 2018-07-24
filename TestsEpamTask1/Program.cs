@@ -15,6 +15,11 @@ namespace TestsEpamTask1
     {
         static void Main(string[] args)
         {
+            var lib = new Library();
+            lib.Add(new Book { Name = "3" });
+            lib.Add(new Book { Name = "4" });
+            lib.Add(new Paper { Name = "4" });
+            var t1 = lib.SearchByName("4");
         }
     }
 }
