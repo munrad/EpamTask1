@@ -58,14 +58,9 @@
     <Compile Include="Core\Extensions\Extensions.cs" />
     <Compile Include="Core\Extensions\Logger.cs" />
     <Compile Include="Core\Extensions\Validator.cs" />
-    <Compile Include="Core\Interfaces\IArchive.cs" />
-    <Compile Include="Core\Interfaces\IBook.cs" />
-    <Compile Include="Core\Interfaces\CoreLibrary\ILetters.cs" />
-    <Compile Include="Core\Interfaces\CoreLibrary\ILibraryObject.cs" />
     <Compile Include="Core\Interfaces\Catalog\ICatalogObject.cs" />
-    <Compile Include="Core\Interfaces\IPaper.cs" />
-    <Compile Include="Core\Interfaces\IPatent.cs" />
-    <Compile Include="Core\Interfaces\IUser.cs" />
+    <Compile Include="Core\Interfaces\Catalog\ILetters.cs" />
+    <Compile Include="Core\Interfaces\Catalog\IPatent.cs" />
     <Compile Include="Core\Users.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
