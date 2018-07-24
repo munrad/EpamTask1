@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using EpamTask1.Core.Classes;
 using EpamTask1.Core.Extensions;
 using EpamTask1.Core.Interfaces;
 using EpamTask1.Core.Interfaces.Catalog;
@@ -43,15 +44,15 @@ namespace EpamTask1.Core
 
             foreach (var t in catalogObjects)
             {
-                if (!(t is IBook book)) continue;
+                if (!(t is Book book)) continue;
                 if (book.Name != name) continue;
                 result.Add(t);
 
-                if (!(t is IPaper paper)) continue;
+                if (!(t is Paper paper)) continue;
                 if (paper.Name != name) continue;
                 result.Add(t);
 
-                if (!(t is IPatent patent)) continue;
+                if (!(t is Patent patent)) continue;
                 if (patent.Name != name) continue;
                 result.Add(t);
             }
@@ -93,12 +94,12 @@ namespace EpamTask1.Core
             return catalogObjects;
         }
 
-        public IList<IBook> SearchBooksByAuthors(string name)
+        public List<Book> SearchBooksByAuthors(string name)
         {
-            var arrResult = new List<IBook>();
+            var arrResult = new List<Book>();
             foreach (var m in catalogObjects)
             {              
-                if (!(m is IBook book)) break;
+                if (!(m is Book book)) break;
                 var arrAuthors = book.Authors;             
                 if (arrAuthors == null) break;
                 foreach (var t in arrAuthors)
@@ -111,13 +112,13 @@ namespace EpamTask1.Core
             return arrResult;
         }
 
-        public IDictionary<string, IList<IBook>> GetSortBooks(string symb)
+        public Dictionary<string, List<Book>> GetSortBooks(string symb)
         {
-            var arr = new List<IBook>();
-            var books = new Dictionary<string, IList<IBook>>();
+            var arr = new List<Book>();
+            var books = new Dictionary<string, List<Book>>();
             foreach (var m in catalogObjects)
             {
-                if (!(m is IBook book)) continue;
+                if (!(m is Book book)) continue;
                 if (book.PubName == null) continue;
                 if (!book.PubName.Contains(symb)) continue;
                 arr.Add(book);
@@ -131,13 +132,13 @@ namespace EpamTask1.Core
             return books;
         }
 
-        public IDictionary<int, IList<ICatalogObject>> GroupByYear()
+        public Dictionary<int, List<ICatalogObject>> GroupByYear()
         {
             var arr = new List<ICatalogObject>();
-            var objects = new Dictionary<int, IList<ICatalogObject>>();
+            var objects = new Dictionary<int, List<ICatalogObject>>();
             foreach (var m in catalogObjects)
             {
-                if (m is IPatent) continue;
+                if (m is Patent) continue;
                 arr.Add(m);
             }
 
