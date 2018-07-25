@@ -29,7 +29,7 @@ namespace EpamTask1.Core
         public Dictionary<User, List<string>> GetPubList()
         {
             var list = new Dictionary<User, List<string>>();
-            var catalog = Catalog.CatalogObjects as List<ICatalogObject>;
+            var catalog = Catalog.CatalogObjects;
             try
             {
                 foreach (var listUser in ListUsers)

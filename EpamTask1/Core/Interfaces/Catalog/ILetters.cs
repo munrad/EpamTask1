@@ -12,5 +12,6 @@ namespace EpamTask1.Core.Interfaces.Catalog
         string PubCity { get; set; }
         string PubName { get; set; }
         int CountCopies { get; set; }
+        int PubYear { get; set; }
     }
 }

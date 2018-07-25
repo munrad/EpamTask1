@@ -80,18 +80,7 @@ namespace EpamTask1
             }
             foreach (var catItem in catalogLocal)
             {
-                switch (catItem)
-                {
-                    case Paper paper:
-                        Extensions.Serializer(list, paper as Paper);
-                        break;
-                    case Book book:
-                        Extensions.Serializer(list, book as Book);
-                        break;
-                    case Patent patent:
-                        Extensions.Serializer(list, patent as Patent);
-                        break;
-                }
+                Extensions.Serializer(list, catItem);
             }
 
             File.WriteAllLines(objectName, list);
