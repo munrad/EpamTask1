@@ -7,7 +7,7 @@ using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core.Classes
 {
-    public class Patent : ICatalogObject, IPatent
+    public class Patent : IPatent
     {
         public int RegNumber { get; set; }
         [IsNotNullOrEmpty]

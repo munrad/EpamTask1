@@ -7,7 +7,7 @@ using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core.Classes
 {
-    public class Book : ICatalogObject, ILetters
+    public class Book : ILetters
     {
         public string Isbn { get; set; }
         [IsNotNullOrEmpty]
@@ -33,7 +33,7 @@ namespace EpamTask1.Core.Classes
         public Book()
         {
             Authors = new List<string>();
-            Isbn = PubCity = Name = Note = "";
+            Isbn = PubCity = Name = Note = PubName = "";
             CountPages = 1;
             Price = CountCopies = 0;
             PubYear = 1900;

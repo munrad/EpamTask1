@@ -7,11 +7,10 @@ using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core.Interfaces.Catalog
 {
-    public interface ILetters
+    public interface ILetters : ICatalogObject
     {
         string PubCity { get; set; }
         string PubName { get; set; }
         int CountCopies { get; set; }
-        int PubYear { get; set; }
     }
 }

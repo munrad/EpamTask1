@@ -6,7 +6,6 @@ using System.Linq;
 using EpamTask1.Core;
 using EpamTask1.Core.Classes;
 using EpamTask1.Core.Extensions;
-using EpamTask1.Core.Interfaces;
 using EpamTask1.Core.Interfaces.Catalog;
 using static EpamTask1.Core.Catalog;
 
@@ -14,67 +13,21 @@ namespace EpamTask1
 {
     public class Library
     {
-        private readonly Catalog catalog;
+        public readonly Users Users;
+        public readonly Archives Archives;
+        public readonly Catalog Catalog;
 
         public Library()
         {
-            catalog = new Catalog();
-        }
-
-        public void Add(ICatalogObject obj, bool isForce = true)
-        {
-            catalog.Add(obj, isForce);
-        }
-
-        public List<ICatalogObject> GetAllObjects()
-        {
-            return catalog.GetAllObjects();
-        }
-
-        public void Remove(ICatalogObject obj)
-        {
-            catalog.Remove(obj);
-        }
-
-        public IList<ICatalogObject> SearchByName(string name)
-        {
-            return catalog.SearchByName(name);
-        }
-
-        public IList<ICatalogObject> SortByYear(bool isReverse)
-        {
-            return catalog.SortByYear(isReverse);
-        }
-
-        public IList<Book> SearchBooksByAuthors(string name)
-        {
-            return catalog.SearchBooksByAuthors(name);
-        }
-
-        public IDictionary<string, List<Book>> GetSortBooks(string symb)
-        {
-            return catalog.GetSortBooks(symb);
-        }
-
-        public IDictionary<int, List<ICatalogObject>> GroupByYear()
-        {
-            return catalog.GroupByYear();
-        }
-
-        public IList<ICatalogObject> CustomSort<T>(CustomSortDel<T> func) where T : IComparable
-        {            
-            return catalog.CustomSort(func);
-        }
-
-        public IList<ICatalogObject> CustomSearch(CustomSearchDel func)
-        {
-            return catalog.CustomSearch(func);
+            Archives = new Archives();
+            Users = new Users();
+            Catalog = new Catalog();
         }
 
         public void Save(string objectName)
         {
             var list = new List<string>();
-            if (!(GetAllObjects() is List<ICatalogObject> catalogLocal))
+            if (!(Catalog.GetAllObjects() is List<ICatalogObject> catalogLocal))
             {
                 throw new Exception("Каталог пуст!");
             }
@@ -89,7 +42,7 @@ namespace EpamTask1
         public void Load(string objectName, bool isForce = false)
         {
             var obj = File.ReadAllLines(objectName).ToList();
-            Extensions.Deserialize(ref CatalogObjects, obj, isForce);
+            Extensions.Deserialize(ref Catalog.CatalogObjects, obj, isForce);
         }
     }
 }

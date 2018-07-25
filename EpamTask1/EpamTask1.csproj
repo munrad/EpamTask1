@@ -45,11 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Archives.cs" />
     <Compile Include="Core\Attributes\CustomTemplates.cs" />
     <Compile Include="Core\Attributes\Limit.cs" />
     <Compile Include="Core\Attributes\IsNotLessZero.cs" />
     <Compile Include="Core\Attributes\IsNotNullOrEmpty.cs" />
     <Compile Include="Core\Catalog.cs" />
+    <Compile Include="Core\Classes\Archive.cs" />
     <Compile Include="Core\Classes\Book.cs" />
     <Compile Include="Core\Classes\Paper.cs" />
     <Compile Include="Core\Classes\Patent.cs" />

@@ -11,18 +11,13 @@ namespace EpamTask1.Core.Classes
     public class User
     {
         public string Name { get; set; }
-        public int NumTicket { get; set; }
+        public string NumTicket { get; set; }
         public DateTime DateReg { get; set; }
-        public int PhoneNum { get; set; }
+        public string PhoneNum { get; set; }
         public bool IsBlock { get; set; }
         public string City { get; set; }
-        public List<Book> Book { get; set; }
-        public List<Paper> Paper { get; set; }
-        public List<Patent> Patent { get; set; }
-
-        public int CompareTo(object obj)
-        {
-            throw new NotImplementedException();
-        }
+        public List<Book> Books { get; set; }
+        public List<Paper> Papers { get; set; }
+        public List<Patent> Patents { get; set; }
     }
 }

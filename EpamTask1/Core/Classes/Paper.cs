@@ -5,7 +5,7 @@ using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core.Classes
 {
-    public class Paper : ICatalogObject, ILetters
+    public class Paper : ILetters
     {
         [IsNotLessZero]
         public int Number { get; set; }

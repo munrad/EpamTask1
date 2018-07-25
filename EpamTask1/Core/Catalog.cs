@@ -9,9 +9,9 @@ using EpamTask1.Core.Interfaces.Catalog;
 
 namespace EpamTask1.Core
 {
-    public sealed class Catalog
+    public class Catalog
     {       
-        public static List<ICatalogObject> CatalogObjects;
+        public List<ICatalogObject> CatalogObjects;
 
         public delegate T CustomSortDel<out T>(ICatalogObject obj);
 
@@ -38,7 +38,7 @@ namespace EpamTask1.Core
             return CatalogObjects;
         }
 
-        public IList<ICatalogObject> SearchByName(string name)
+        public List<ICatalogObject> SearchByName(string name)
         {
             var result = new List<ICatalogObject>();
 
@@ -52,7 +52,7 @@ namespace EpamTask1.Core
             return result;
         }
 
-        public IList<ICatalogObject> CustomSort<T>(CustomSortDel<T> func) where T : IComparable
+        public List<ICatalogObject> CustomSort<T>(CustomSortDel<T> func) where T : IComparable
         {
             for (var i = 0; i < CatalogObjects.Count; i++)
             {
@@ -68,7 +68,7 @@ namespace EpamTask1.Core
             return CatalogObjects;
         }
 
-        public IList<ICatalogObject> CustomSearch(CustomSearchDel func)
+        public List<ICatalogObject> CustomSearch(CustomSearchDel func)
         {
             var result = new List<ICatalogObject>();
             foreach (var catalogObject in CatalogObjects)
@@ -81,7 +81,7 @@ namespace EpamTask1.Core
             return result;
         }
 
-        public IList<ICatalogObject> SortByYear(bool isReverse = false)
+        public List<ICatalogObject> SortByYear(bool isReverse = false)
         {
             CatalogObjects.Sort(new Comparers.SortByYear { IsReverse = isReverse });
             return CatalogObjects;
@@ -141,6 +141,23 @@ namespace EpamTask1.Core
                     objects.Add(catalogObject.PubYear, arr.FindAll(n => n.PubYear.Equals(catalogObject.PubYear)));
             }
             return objects;
+        }
+
+        public Dictionary<string, List<ILetters>> GetSortCatalogByPublishers()
+        {
+            var list = CatalogObjects.OfType<ILetters>().ToList();
+            var dic = list.GroupBy(m => m.PubName).Select(m =>
+            {
+                return new
+                {
+                     PubName = m.Key,
+                     Letters = m.Select(n => n).ToList()
+                };
+            }).ToDictionary(m => m.PubName, m => m.Letters);
+            var lastElem = dic.Last();
+            var lastVal = lastElem.Value.OrderBy(m => m.PubYear).ToList();
+            dic[lastElem.Key] = lastVal;
+            return dic;
         }
 
     }

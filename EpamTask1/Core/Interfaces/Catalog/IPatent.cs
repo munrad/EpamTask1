@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 namespace EpamTask1.Core.Interfaces.Catalog
 {
-    public interface IPatent
-    {
-
-    }
+    public interface IPatent : ICatalogObject { }
 }
